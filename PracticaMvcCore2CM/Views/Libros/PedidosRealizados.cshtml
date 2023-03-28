@@ -1,0 +1,15 @@
+﻿@model List<VistaPedido>
+
+<h1>Pedidos Realizados</h1>
+
+<ul class="list-group">
+    @foreach(VistaPedido vped in Model)
+    {
+        <li class="list-group-item">
+            <img src="~/images/@vped.Portada" width="400" height="400"/>
+            <h2>@vped.Titulo</h2>
+            <p>@vped.Nombre, @vped.Apellidos</p>
+            <h3><b>@vped.PRECIOFINAL €</b></h3>
+        </li>
+    }
+</ul>

@@ -1,0 +1,45 @@
+﻿@using PracticaMvcCore2CM.Extensions
+@model List<Libro>
+
+<div style="margin: 0 auto; text-align: center">
+    <div class="p-4 sm:ml-64">
+        <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+            <div class="text-center p-4">
+                <h1 class="text-3xl font-sans md:font-serif" style="margin-bottom: 20px;">FAVORITOS</h1>
+
+                @if (Context.Session.GetObject<List<int>>("CARRITO") == null && Model == null)
+                {
+                    <h1 style="color:red" class="display-4">
+                        @ViewData["MENSAJE"]
+                    </h1>
+                }
+                else
+                {
+                    foreach(Libro item in Model)
+                    {
+                        <div class="card" style="width: 28rem; margin: 0 auto;">
+                        <a asp-controller="Libros" asp-action="DetallesLibros" asp-route-idlibro="@item.IdLibro">
+                            <img class="card-img-top" src="~/images/@item.Portada" alt="Card image cap" width="100" height="350">
+                            <div class="card-body">
+                                <h5 class="card-title">@item.Titulo</h5>
+                                <h5 class="card-title">
+                                    <a asp-controller="Libros" asp-action="ProductosCarrito" asp-route-ideliminar="@item.IdLibro" class="btn btn-danger">
+                                        Borrar de Carrito
+                                    </a>
+                                </h5>
+                            </div>
+                        </a>
+                    </div>
+                    }
+                    <a asp-controller="Libros" 
+                        asp-action="PedidosRealizados"
+                        asp-route-idusuario="@Context.User.FindFirst("Id")?.Value" 
+                        class="btn btn-info">
+                        Finalizar Compra
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,23 @@
+﻿@if (Context.User.Identity.IsAuthenticated == false)
+{
+    <li class="nav-item" style="text-align: right">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Managed" asp-action="Login">Login</a>
+    </li>
+}
+else
+{
+
+    <li class="nav-item">
+        <a asp-controller="Managed" asp-action="DetallesUsuario" asp-route-idusuario="@Context.User.FindFirst("Id")?.Value">
+            <img src="~/images/@Context.User.FindFirst("Foto")?.Value" class="rounded" width="50" height="50"/>
+            <label>Hola, @Context.User.FindFirst("Nombre")?.Value</label>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark"
+            asp-controller="Managed" 
+            asp-action="LogOut">
+           Cerrar Sesion
+        </a>
+    </li>
+}

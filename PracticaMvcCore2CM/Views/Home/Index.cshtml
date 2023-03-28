@@ -1,0 +1,20 @@
+﻿@model List<Libro>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@foreach(Libro libro in Model)
+{
+<div class="card-group">
+    <div class="card">
+        <img src="~/images/@libro.Portada" class="card-img-top" style="width: 200px; height: 250px; margin: 0 auto">
+        <a asp-controller="Libros" asp-action="DetallesLibros" asp-route-idlibro="@libro.IdLibro">
+            <div class="card-body">
+                <h5 class="card-title">@libro.Autor</h5>
+            </div>
+        </a>
+    </div>
+</div>
+}
+
